@@ -8,8 +8,8 @@
     "commit": "git-cz",
     "lint": "eslint 'src/**'",
     "test": "jest",
-    "release": "standard-version",
-    "publish": "git push --follow-tags origin master && npm publish"
+    "version": "standard-version",
+    "release": "git push --follow-tags origin master && npm publish --registry=https://registry.npmjs.org --access public"
   },
   "repository": {
     "type": "git",
