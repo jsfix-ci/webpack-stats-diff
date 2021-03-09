@@ -36,11 +36,12 @@ program
   )
   .action((oldStats, newStats) => {
     const config = {};
-    if (program.extensions) {
-      config.extensions = program.extensions.split(',');
+    const options = program.opts();
+    if (options.extensions) {
+      config.extensions = options.extensions.split(',');
     }
-    if (Number.isInteger(program.threshold)) {
-      config.threshold = program.threshold;
+    if (Number.isInteger(options.threshold)) {
+      config.threshold = options.threshold;
     }
     const oldPath = path.resolve(process.cwd(), oldStats);
     const newPath = path.resolve(process.cwd(), newStats);
@@ -52,7 +53,7 @@ program
     const newAssets = require(newPath).assets;
     const statsDiff = getStatsDiff(oldAssets, newAssets, config);
 
-    const options = program.opts();
+    
     switch (options.type) {
       case 'markdown':
         printMarkdownDiff(statsDiff);

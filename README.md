@@ -18,8 +18,12 @@ To compare your bundle sizes before and after, you'll need to configure webpack 
 
 For example, to compare the bundle sizes between branches, you could save the master build stats to a file `master.json` and the branch build stats to `my-branch.json` and run
 
-```
+```bash
 webpack-stats-diff master.json my-branch.json
+# options
+# [--type terminal|markdown|wechat-work]
+# [--extensions js,jsx]
+# [--threshold 5]
 ```
 
 ![terminal showing the result of running the command](demo-screenshot.png)
