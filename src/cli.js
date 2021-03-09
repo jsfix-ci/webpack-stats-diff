@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 const program = require('commander');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
-const { getStatsDiff, printStatsDiff } = require('./');
+const { getStatsDiff, printTerminalDiff, printMarkdownDiff } = require('./');
 
 const printError = text => {
   console.error(chalk.red(text));
@@ -28,6 +27,13 @@ program
     'minimum % size change to report. Default 5.',
     parseInt
   )
+  .addOption(
+    new program.Option(
+      '--type <type>',
+      'Prints the diff stats in type',
+      'terminal'
+    ).choices(['markdown', 'terminal'])
+  )
   .action((oldStats, newStats) => {
     const config = {};
     if (program.extensions) {
@@ -44,8 +50,18 @@ program
 
     const oldAssets = require(oldPath).assets;
     const newAssets = require(newPath).assets;
+    const statsDiff = getStatsDiff(oldAssets, newAssets, config);
 
-    printStatsDiff(getStatsDiff(oldAssets, newAssets, config));
+    const options = program.opts();
+    switch (options.type) {
+      case 'markdown':
+        printMarkdownDiff(statsDiff);
+        break;
+
+      default:
+        printTerminalDiff(statsDiff);
+        break;
+    }
   })
   .on('--help', () => {
     console.log();
