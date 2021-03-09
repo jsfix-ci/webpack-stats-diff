@@ -22,8 +22,34 @@ const getSizeText = size => {
 
   return `${+(size / Math.pow(1024, index)).toPrecision(3)} ${
     abbreviations[index]
-  }`;
+  }`
 };
+
+function toGreen (str) {
+  return `<font color="info">${str}</font>`
+}
+
+function toRed (str) {
+  return `<font color="warning">${str}</font>`
+}
+
+// function toGray (str) {
+//   return `<font color="comment">${str}</font>`
+// }
+
+function tintField(str, cb) {
+  if (str === 'added' || str === 'bigger') {
+    return toGreen(cb(str))
+  }
+  return toRed(cb(str))
+}
+
+function tintSize(str, size) {
+  if (size > 0) return toGreen(str)
+  if (size < 0) return toRed(str)
+  return str
+}
+
 
 const printAddedAndRemovedAssetTables = results => {
   return ['added', 'removed']
@@ -36,7 +62,7 @@ const printAddedAndRemovedAssetTables = results => {
       const columns = TABLE_HEADERS.slice(0, TABLE_HEADERS.length - 1);
       const header = makeHeader(columns);
 
-      return `**${capitalize(field)}**\n\n${header}${assets.map(asset => {
+      return `**${tintField(field, capitalize)}**\n\n${header}${assets.map(asset => {
         return [
           asset.name,
           getSizeText(asset.oldSize),
@@ -59,13 +85,13 @@ const printBiggerAndSmallerAssetTables = results => {
 
       const header = makeHeader(TABLE_HEADERS);
 
-      return `**${capitalize(field)}**\n\n${header}${assets.map(asset => {
+      return `**${tintField(field, capitalize)}**\n\n${header}${assets.map(asset => {
         return [
           asset.name,
           getSizeText(asset.oldSize),
           getSizeText(asset.newSize),
-          getSizeText(asset.diff),
-          `${conditionalPercentage(asset.diffPercentage)}`
+          tintSize(getSizeText(asset.diff), asset.diff),
+          tintSize(`${conditionalPercentage(asset.diffPercentage)}`, asset.diffPercentage)
         ].join(' | ');
       })}`;
     })
@@ -81,8 +107,8 @@ const printTotalTable = total => {
     total.name,
     getSizeText(total.oldSize),
     getSizeText(total.newSize),
-    getSizeText(total.diff),
-    `${conditionalPercentage(total.diffPercentage)}`
+    tintSize(getSizeText(total.diff), total.diff),
+    tintSize(`${conditionalPercentage(total.diffPercentage)}`, total.diffPercentage)
   ].join(' | ')}`;
 };
 
@@ -93,7 +119,7 @@ module.exports = statsDiff => {
     printTotalTable(statsDiff.total)
   ]
   .filter(s => s && s.trim())
-  .join('\n\n')
+  .join('\n` `\n')
 
   process.stdout.write(str + '\n');
 };

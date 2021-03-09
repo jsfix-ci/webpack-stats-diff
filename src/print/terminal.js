@@ -41,31 +41,33 @@ const getSizeText = size => {
 const printAssetsTables = results => {
   ['added', 'removed', 'bigger', 'smaller'].forEach(field => {
     const assets = results[field];
-    if (assets.length > 0) {
-      const sectionColor = ['added', 'bigger'].includes(field)
-        ? chalk.green.underline.bold
-        : chalk.red.underline.bold;
-      console.log(sectionColor(capitalize(field)));
+    if (assets.length === 0) {
+      return;
+    }
 
-      if (['added', 'removed'].includes(field)) {
-        const tableData = [
-          [chalk.bold('Asset'), chalk.bold('Diff')],
-          ...assets.map(asset => [asset.name, getSizeText(asset.diff)])
-        ];
-        console.log(table(tableData, ASSET_TABLE_CONFIG));
-      } else {
-        const tableData = [
-          TABLE_HEADERS,
-          ...assets.map(asset => [
-            asset.name,
-            getSizeText(asset.oldSize),
-            getSizeText(asset.newSize),
-            getSizeText(asset.diff),
-            `${asset.diffPercentage.toFixed(2)} %`
-          ])
-        ];
-        console.log(table(tableData, ASSET_TABLE_CONFIG));
-      }
+    const sectionColor = ['added', 'bigger'].includes(field)
+      ? chalk.green.underline.bold
+      : chalk.red.underline.bold;
+    console.log(sectionColor(capitalize(field)));
+
+    if (['added', 'removed'].includes(field)) {
+      const tableData = [
+        [chalk.bold('Asset'), chalk.bold('Diff')],
+        ...assets.map(asset => [asset.name, getSizeText(asset.diff)])
+      ];
+      console.log(table(tableData, ASSET_TABLE_CONFIG));
+    } else {
+      const tableData = [
+        TABLE_HEADERS,
+        ...assets.map(asset => [
+          asset.name,
+          getSizeText(asset.oldSize),
+          getSizeText(asset.newSize),
+          getSizeText(asset.diff),
+          `${asset.diffPercentage.toFixed(2)} %`
+        ])
+      ];
+      console.log(table(tableData, ASSET_TABLE_CONFIG));
     }
   });
 };
