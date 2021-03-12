@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/chuyik/webpack-stats-diff/compare/v1.4.0...v1.5.0) (2021-03-12)
+
+
+### Features
+
+* add skipPrint option ([86eb79d](https://github.com/chuyik/webpack-stats-diff/commit/86eb79d2e53fa737a3ca797c4a073fa9116f811c))
+
 ## [1.4.0](https://github.com/chuyik/webpack-stats-diff/compare/v1.3.0...v1.4.0) (2021-03-09)
 
 
