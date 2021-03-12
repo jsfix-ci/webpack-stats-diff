@@ -112,7 +112,7 @@ const printTotalTable = total => {
   ].join(' | ')}`;
 };
 
-module.exports = statsDiff => {
+module.exports = (statsDiff, skipPrint) => {
   const str = [
     printAddedAndRemovedAssetTables(statsDiff),
     printBiggerAndSmallerAssetTables(statsDiff),
@@ -121,5 +121,6 @@ module.exports = statsDiff => {
   .filter(s => s && s.trim())
   .join('\n` `\n')
 
+  if (skipPrint) return str
   process.stdout.write(str + '\n');
 };
