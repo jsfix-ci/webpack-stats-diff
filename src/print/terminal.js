@@ -30,7 +30,7 @@ const getSizeText = size => {
     return '0';
   }
 
-  const abbreviations = ['bytes', 'KiB', 'MiB', 'GiB'];
+  const abbreviations = ['bytes', 'KB', 'MB', 'GB'];
   const index = Math.floor(Math.log(Math.abs(size)) / Math.log(1024));
 
   return `${+(size / Math.pow(1024, index)).toPrecision(3)} ${
