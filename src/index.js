@@ -1,12 +1,12 @@
 const { getAssetsDiff, getStatsDiff } = require('./getStatsDiff');
 const printTerminalDiff = require('./print/terminal');
 const printMarkdownDiff = require('./print/markdown');
-const printWechatWorkDiff = require('./print/wechat-work');
+const printWeWorkDiff = require('./print/wework');
 
 module.exports = {
   getAssetsDiff,
   getStatsDiff,
   printTerminalDiff,
   printMarkdownDiff,
-  printWechatWorkDiff
+  printWeWorkDiff
 };

@@ -3,7 +3,7 @@ const program = require('commander');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
-const { getStatsDiff, printTerminalDiff, printMarkdownDiff, printWechatWorkDiff } = require('./');
+const { getStatsDiff, printTerminalDiff, printMarkdownDiff, printWeWorkDiff } = require('./');
 
 const printError = text => {
   console.error(chalk.red(text));
@@ -32,7 +32,7 @@ program
       '--type <type>',
       'Prints the diff stats in type',
       'terminal'
-    ).choices(['markdown', 'terminal', 'wechat-work'])
+    ).choices(['markdown', 'terminal', 'wework'])
   )
   .action((oldStats, newStats) => {
     const config = {};
@@ -58,8 +58,8 @@ program
       case 'markdown':
         printMarkdownDiff(statsDiff);
         break;
-      case 'wechat-work': 
-        printWechatWorkDiff(statsDiff);
+      case 'wework': 
+        printWeWorkDiff(statsDiff);
         break;
       default:
         printTerminalDiff(statsDiff);
