@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/chuyik/webpack-stats-diff/compare/v1.5.0...v1.6.0) (2021-03-14)
+
+
+### Features
+
+* 优化企业微信显示 ([75ece2f](https://github.com/chuyik/webpack-stats-diff/commit/75ece2f4293fbbef2eef4da70587dc95b447b6bb))
+
 ## [1.5.0](https://github.com/chuyik/webpack-stats-diff/compare/v1.4.0...v1.5.0) (2021-03-12)
 
 
