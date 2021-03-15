@@ -65,12 +65,12 @@ const printAddedAndRemovedAssetTables = results => {
       // const columns = TABLE_HEADERS.slice(0, TABLE_HEADERS.length - 1);
       const header = ''; // makeHeader(columns);
 
-      return `${tintField(field, capitalize)}\n\n${header}${assets.map(asset => {
+      return `${tintField(field, capitalize)}\n${header}${assets.map(asset => {
         return `${asset.name}: ${getSizeText(asset.newSize)}, ${tintSize(getSizeText(asset.diff, true), asset.diff)}`
       }).join('\n')}`;
     })
     .filter(Boolean)
-    .join('\n\n');
+    .join('\n');
 };
 
 const printBiggerAndSmallerAssetTables = results => {
@@ -83,12 +83,12 @@ const printBiggerAndSmallerAssetTables = results => {
 
       const header = ''; // makeHeader(TABLE_HEADERS);
 
-      return `${tintField(field, capitalize)}\n\n${header}${assets.map(asset => {
+      return `${tintField(field, capitalize)}\n${header}${assets.map(asset => {
         return `${asset.name}: ${getSizeText(asset.newSize)}(Old: ${getSizeText(asset.oldSize)}), ${tintSize(getSizeText(asset.diff, true), asset.diff)}(${tintSize(`${conditionalPercentage(asset.diffPercentage)}`, asset.diffPercentage)})`
       }).join('\n')}`;
     })
     .filter(Boolean)
-    .join('\n\n');
+    .join('\n');
 };
 
 const printTotalTable = total => {
@@ -97,7 +97,7 @@ const printTotalTable = total => {
 
   let percent = `${conditionalPercentage(total.diffPercentage)}`
   let percentStr = percent ? `(${tintSize(percent, total.diffPercentage)})` : ''
-  return `${capitalize(total.name)}\n\n${header}` + `${getSizeText(total.newSize)}(Old: ${getSizeText(total.oldSize)}), ${tintSize(getSizeText(total.diff, true), total.diff)}${percentStr}`;
+  return `${capitalize(total.name)}\n${header}` + `${getSizeText(total.newSize)}(Old: ${getSizeText(total.oldSize)}), ${tintSize(getSizeText(total.diff, true), total.diff)}${percentStr}`;
 };
 
 module.exports = (statsDiff, skipPrint) => {
